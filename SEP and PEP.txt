@@ -1,0 +1,34 @@
+***Service Endpoint***
+-> Service endpoint provides secure and direct connectivity to Azure services over an optimized route over the Azure backbone network. Endpoints allow you to secure your critical Azure service resources to only your virtual networks. Service Endpoints    enables private IP addresses in the VNet to reach the endpoint of an Azure service without needing a public IP address on the VNet.
+-> Lets say we have two webapps attached to the backend pools of an application gateway, by default they will communicate using public internet but it is not save to communicate using public internet so we have to let them communicate using Microsoft azure backbone network, this can be done by adding service endpoint.
+   
+click on "VNet" in which applcation gateway resides -> click on "service endpoints" on resource blade of VNet -> click on "+ Add" -> select Service "Microsoft.Web" -> select any Subnet of VNet -> click on ADD
+
+-> Now this will route the traffic from VNet to the azure app service through microsoft azure backbone network.
+-> Service endpoints are available for the following Azure services and regions. The Microsoft.* resource is in parenthesis. Enable this resource from the subnet side while configuring service endpoints for your service:
+
+Azure Storage (Microsoft.Storage): Generally available in all Azure regions.
+Azure SQL Database (Microsoft.Sql): Generally available in all Azure regions.
+Azure Synapse Analytics (Microsoft.Sql): Generally available in all Azure regions for dedicated SQL pools (formerly SQL DW).
+Azure Database for PostgreSQL server (Microsoft.Sql): Generally available in Azure regions where database service is available.
+Azure Database for MySQL server (Microsoft.Sql): Generally available in Azure regions where database service is available.
+Azure Database for MariaDB (Microsoft.Sql): Generally available in Azure regions where database service is available.
+Azure Cosmos DB (Microsoft.AzureCosmosDB): Generally available in all Azure regions.
+Azure Key Vault (Microsoft.KeyVault): Generally available in all Azure regions.
+Azure Service Bus (Microsoft.ServiceBus): Generally available in all Azure regions.
+Azure Event Hubs (Microsoft.EventHub): Generally available in all Azure regions.
+Azure Data Lake Store Gen 1 (Microsoft.AzureActiveDirectory): Generally available in all Azure regions where ADLS Gen1 is available.
+Azure App Service (Microsoft.Web): Generally available in all Azure regions where App service is available.
+Azure Cognitive Services (Microsoft.CognitiveServices): Generally available in all Azure regions where Cognitive services are available.
+
+********Private Endpoint********
+-> A private endpoint is a network interface that uses a private IP address from your virtual network. This network interface connects you privately and securely to a service that's powered by Azure Private Link. By enabling a private endpoint, you're bringing the service into your virtual network.
+-> The service could be an Azure service such as:
+1. Azure Storage
+2. Azure Cosmos DB
+3. Azure SQL Database
+4. Your own service, using Private Link service.
+-> How to enable private endpoint to SQLdb:
+Goto/click on SQL server in which SQLdb resides -> click on "Networking" option on resource blade -> click on private access -> click on "+ create a private endpoint" -> select resource group, give any name to PE, select Target sub-resource "sqlServer" -> select Subnet different from "Dedicated subnet" -> click on create 
+-> After creating private endpoint one private ip is assigned to SQL server.
+
